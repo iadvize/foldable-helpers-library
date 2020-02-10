@@ -1,9 +1,17 @@
-import { hello } from '../src/index';
+import { not } from '../src/guard';
+import { combineGuards } from '../src/combineGuards';
+import { createFold } from '../src/createFold';
+import { createFoldObject } from '../src/createFoldObject';
+
+import * as indexExport from '../src';
 
 describe('index', () => {
-  describe('hello', () => {
-    it('should return hello', () => {
-      expect(hello()).toEqual('hello world');
+  it('should export createFold', () => {
+    expect(indexExport).toEqual({
+      not,
+      createFold,
+      createFoldObject,
+      combineGuards,
     });
   });
 });

@@ -1,46 +1,134 @@
-# hello-world-javascript-library
-![Continuous integration](https://github.com/iadvize/hello-world-javascript-library/workflows/Continuous%20integration/badge.svg)
+@iadvize-oss/foldable-helpers
+====================
+![Continuous integration](https://github.com/iadvize/foldable-helpers-library/workflows/Continuous%20integration/badge.svg)
 
-This is a repo template for other javascript oss libraries at iAdvize. Use it
-for your new library to have a repository set up with lint, test and usefull
-github workflows.
+> Helpers to fold on things
 
-# Features
+While we recommend using `@iadvize-oss/foldable-helpers` with Typescript, it can
+be used in standard Javascript apps.
 
-## Continuous integration
+# 💻 Usage 
 
-Runs lint, test and build on every commit.
+First, install the library:
 
-## Continuous delivery
+```bash
+yarn add @iadvize-oss/foldable-helpers
+```
 
-Publish canary versions of the library for pull requests. Publish latest version
-once a pull request is merged on master.
+[📖 Documentation](https://iadvize.github.io/foldable-helpers-library/)
 
-## Automatic version bump
+## Classic fold - `createFold`
 
-Flag your pull requests with `patch`, `minor`, `major` to increment the version
-of your package or with `no-release` otherwise.
+You have a sum type and the type guards for each of the types. For example:
 
-## Automatic changelog bump
+```ts
+type T = A | B | C;
 
-Simply complete the `Unreleased` section of the changelog in your pull request.
-It will be update to the new version once merge.
+function isA(t: T): t is A { ... };
+function isB(t: T): t is B { ... };
+function isC(t: T): t is C { ... };
+```
 
-## Automatic release creation
+To create a fold function to fold on `T`, use `createFold`
 
-Github releases are created automatically on a new version, using the
-corresponding part of the changelog as content.
+```ts
+import { pipe } from 'fp-ts/es6/pipeable';
 
-## Automatic rebase and merge 
+import { createFold } from '@iadvize-oss/foldable-helpers';
 
-Flagging a pull request with the `keep-rebased-then-merge` flag with keep it
-rebased until it can me merged.
+const foldOnT = createFold(isA, isB, isC);
 
-## Automatic Github Pages documentation release 
+const t: T = ...;
 
-Merging a pull request on master will push a new generation of the documentation
-on `gh-pages` ([example](https://iadvize.github.io/hello-world-javascript-library/))'
+pipe(
+  t,
+  foldOnT(
+    (tbis) => console.log('executed when t is A', { tbis }),
+    (tbis) => console.log('executed when t is B', { tbis }),
+    (tbis) => console.log('executed when t is C', { tbis }),
+  ),
+);
+```
 
-## Dependabot
+## Named fold - `createFoldObject`
 
-See [`config`](.dependabot/config.yml)
+Classic fold is very useful but could become hard to read when we have more than
+3-4 types to fold on.
+Because we don't have named parameters in JS/Typescript, we have to use
+something else.
+
+You still have a sum type and the type guards for each of the types.
+For example:
+
+```ts
+type T = A | B | C;
+
+function isA(t: T): t is A { ... };
+function isB(t: T): t is B { ... };
+function isC(t: T): t is C { ... };
+```
+
+To create a named fold function to fold on `T` without loosing readability,
+use `createFoldObject`. You choose the name of each fold function by passing
+an object.
+
+```ts
+import { pipe } from 'fp-ts/es6/pipeable';
+
+import { createFoldObject } from '@iadvize-oss/foldable-helpers';
+
+const foldOnT = createFoldObject({
+  onA: isA,
+  onB: isB,
+  onC: isC
+});
+
+const t: T = ...;
+
+pipe(
+  t,
+  foldOnT({
+    onA: (tbis) => console.log('executed when t is A', { tbis }),
+    onB: (tbis) => console.log('executed when t is B', { tbis }),
+    onC: (tbis) => console.log('executed when t is C', { tbis }),
+  }),
+);
+```
+
+## `combineGuards`
+
+When using fold you will probably encounter cases where a type is a combination (union) of different guards
+to reduce the boilerplate having to write each combination by hand you can use the `combineGuards` helper.
+
+```ts
+type A = { a: string };
+type B = { b: number };
+
+const isTypeA = (value: any): value is A =>
+  value != null && typeof value.a === 'string';
+
+const isTypeB = (value: any): value is B =>
+  value != null && typeof value.b === 'number';
+
+const oldIsTypeAAndB = (value: any): value is A & B =>
+    isTypeA(value) && isTypeB(value);
+
+const isTypeAAndB = combineGuards(isTypeA, isTypeB); // :(t: any): t is A & B => boolean
+```
+
+## `not`
+
+When using createFold you **need to make sure that each guard mutually excludes the others** but it can sometimes be painfull if one type depends on another, therefore we let you use the `not` operator to exclude a guard
+
+```ts
+type TypeA = { a: string};
+type TypeB = { a: 'test'};
+
+const isTypeA = (value: {a: unknown}): value is TypeA => typeof value.a === 'string';
+const isTypeB = (value: TypeA): value is TypeB => value.a === 'test';
+
+const fold = createFoldObject({
+  onTypeA: combineGuards(isTypeA, not(isTypeB)),
+  onTypeB: isTypeB,
+});
+```
