@@ -1,0 +1,6 @@
+node_modules/
+esm/
+dist/
+coverage/
+docs/
+gh-pages-content/

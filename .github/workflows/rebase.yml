@@ -1,0 +1,32 @@
+name: Rebase pull requests when master change
+
+on:
+  pull_request:
+    types: [labeled]
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    name: 'Rebase branch on master'
+
+    steps:
+    - name: 'Checkout repository'
+      uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
+
+    - name: 'Rebase one pull request based on master with label'
+      uses: iadvize/actions/rebase-pull-requests@608af92d8670e479c749c2c3c6ab782b91d0e4e3
+      with:
+        # we use another token here
+        # because an action in a workflow run can't trigger a new workflow run
+        # with the GITHUB_TOKEN
+        # @see https://help.github.com/en/articles/events-that-trigger-workflows#event-restrictions
+        token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
+        label: 'keep-rebased-then-merge'
+        onlyOnce: true
+

@@ -1,0 +1,52 @@
+{
+  "name": "@iadvize-oss/hello-world",
+  "version": "0.1.8-beta.1",
+  "description": "Say hello",
+  "main": "dist/index.js",
+  "module": "esm/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "esm"
+  ],
+  "scripts": {
+    "build": "rm -rf dist esm && rollup -c",
+    "test:js": "jest --coverage",
+    "lint:js": "echo \"no lint\"",
+    "bump-changelog": "VERSION=$(cat package.json | jq '.version') && remark CHANGELOG.md -o --use @jarrodldavis/changelog-version-bump=version:$VERSION && git add CHANGELOG.md",
+    "docs": "typedoc"
+  },
+  "homepage": "https://github.com/iadvize/hello-world-javascript-library#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iadvize/hello-world-javascript-library.git"
+  },
+  "keywords": [
+    "iAdvize"
+  ],
+  "bugs": {
+    "url": "https://github.com/iadvize/hello-world-javascript-library/issues"
+  },
+  "author": "iAdvize developers",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@jarrodldavis/remark-changelog-version-bump": "^0.1.1",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@types/jest": "^25.1.2",
+    "babel-jest": "^25.1.0",
+    "jest": "^25.1.0",
+    "remark-cli": "^7.0.1",
+    "rollup": "^1.31.0",
+    "rollup-plugin-multi-input": "^1.0.3",
+    "rollup-plugin-terser": "^5.2.0",
+    "rollup-plugin-typescript2": "^0.25.3",
+    "ts-jest": "^25.2.0",
+    "tslib": "^1.10.0",
+    "typedoc": "^0.16.9",
+    "typescript": "^3.7.5"
+  }
+}

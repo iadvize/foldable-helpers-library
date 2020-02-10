@@ -1,0 +1,112 @@
+name: Continuous integration
+
+on:
+  push:
+    branches-ignore:
+      - 'gh-pages'
+    tags-ignore:
+      - '*'
+
+jobs:
+  install:
+    name: 'install'
+    runs-on: ubuntu-18.04
+
+    steps:
+    - uses: actions/checkout@v2-beta
+
+    - uses: actions/setup-node@v1
+      with:
+        node-verion: '12.x'
+
+    - name: Cache npm cache
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: v1-npm-${{ github.ref }}-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          v1-npm-${{ github.ref }}-
+          v1-npm-
+
+    - name: Restore node_modules
+      id: node-modules-cache
+      uses: actions/cache@v1
+      with:
+        path: node_modules
+        key: v1-node-modules-${{ github.ref }}-${{ hashFiles('package-lock.json') }}
+
+    - name: Install
+      if: steps.node-modules-cache.outputs.cache-hit != 'true'
+      run: npm ci
+
+  lint:
+    name: 'lint'
+    runs-on: ubuntu-18.04
+
+    needs:
+      - install
+
+    steps:
+    - uses: actions/checkout@v2-beta
+
+    - uses: actions/setup-node@v1
+      with:
+        node-verion: '12.x'
+
+    - name: Restore node_modules
+      uses: actions/cache@v1
+      id: node-modules-cache
+      with:
+        path: node_modules
+        key: v1-node-modules-${{ github.ref }}-${{ hashFiles('package-lock.json') }}
+
+    - name: Lint
+      run: npm run lint:js
+
+  test:
+    name: 'test'
+    runs-on: ubuntu-18.04
+
+    needs:
+      - install
+
+    steps:
+    - uses: actions/checkout@v2-beta
+
+    - uses: actions/setup-node@v1
+      with:
+        node-verion: '12.x'
+
+    - name: Restore node_modules
+      uses: actions/cache@v1
+      id: node-modules-cache
+      with:
+        path: node_modules
+        key: v1-node-modules-${{ github.ref }}-${{ hashFiles('package-lock.json') }}
+
+    - name: Test
+      run: npm run test:js
+
+  build:
+    name: 'build'
+    runs-on: ubuntu-18.04
+
+    needs:
+      - install
+
+    steps:
+    - uses: actions/checkout@v2-beta
+
+    - uses: actions/setup-node@v1
+      with:
+        node-verion: '12.x'
+
+    - name: Restore node_modules
+      uses: actions/cache@v1
+      id: node-modules-cache
+      with:
+        path: node_modules
+        key: v1-node-modules-${{ github.ref }}-${{ hashFiles('package-lock.json') }}
+
+    - name: Build
+      run: npm run build

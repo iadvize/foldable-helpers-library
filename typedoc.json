@@ -1,0 +1,8 @@
+{
+  "inputFiles": ["./src"],
+  "mode": "modules",
+  "entryPoint": "\"index\"",
+  "exclude": ["**/*+test.ts"],
+  "includeVersion": true,
+  "out": "docs"
+}

@@ -1,0 +1,44 @@
+name: Merge pull requests once ready
+
+on:
+  check_suite:
+    types: [completed]
+  pull_request:
+    types: [labeled]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    name: 'Merge pull requests'
+
+    steps:
+    - name: Find pull request
+      uses: iadvize/actions/find-pull-request@2.0.1
+      # only useful for check_suite, we have a pull_request object on pull_request and pull_request_review
+      if: github.event_name == 'check_suite'
+      id: pr
+      with:
+        branch: ${{ github.event.check_suite.head_branch }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: 'Merge the current pull request if possible'
+      uses: iadvize/actions/merge@2.0.1
+      if: >
+        github.event_name != 'check_suite' || (
+          github.event_name == 'check_suite'
+          && github.event.check_suite.head_branch != 'master'
+          && github.event.check_suite.conclusion == 'success'
+          && steps.pr.outputs.pullExists == 'true'
+        )
+      with:
+        # we use another token here
+        # because an action in a workflow run can't trigger a new workflow run
+        # with the GITHUB_TOKEN
+        # @see https://help.github.com/en/articles/events-that-trigger-workflows#event-restrictions
+        token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
+        pullNumber: ${{ (github.event.pull_request && github.event.pull_request.number) || steps.pr.outputs.pullNumber }}
+        label: 'keep-rebased-then-merge'
+

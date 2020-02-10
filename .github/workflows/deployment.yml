@@ -1,0 +1,90 @@
+name: Deployment
+
+on: deployment
+
+jobs:
+  npm:
+    name: 'Deploy on npm'
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: Update deployment status
+      uses: actions/github-script@0.4.0
+      env:
+        DEPLOYMENT_ID: ${{ github.event.deployment.id }}
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        previews: 'ant-man,flash'
+        script: |
+          const name = context.payload.deployment.payload.name;
+          const version = context.payload.deployment.payload.version;
+          const npmUrl = `https://www.npmjs.com/package/${name}/v/${version}`;
+
+          const { data: deploymentStatus } = github.repos.createDeploymentStatus({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            deployment_id: process.env.DEPLOYMENT_ID,
+            environment_url: npmUrl,
+            description: `Deployed ${name}@${version} on npm`,
+            auto_inactive: false,
+            state: 'in_progress',
+          });
+
+    - name: Checkout code
+      uses: actions/checkout@master
+      with:
+        ref: ${{ github.event.deployment.payload.ref }}
+
+    - name: Git config
+      run: |
+        git config user.name "Github actions"
+        git config user.email "github-actions@iadvize.com"
+
+    - uses: actions/setup-node@v1
+      with:
+        registry-url: https://registry.npmjs.org/
+        node-verion: '12.x'
+
+    - name: Install
+      run: npm ci
+
+    - name: Build
+      run: npm run build
+
+    - name: Publish npm
+      id: publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        VERSION: ${{ github.event.deployment.payload.version }}
+        TAG: ${{ github.event.deployment.payload.npmTag }}
+      run: |
+        npm version $VERSION --allow-same-version --no-git-tag-version
+        npm publish --access public --tag $TAG
+
+        echo "::set-output name=state::done"
+
+    - name: Update deployment status
+      if: always()
+      uses: actions/github-script@0.4.0
+      env:
+        DEPLOYMENT_ID: ${{ github.event.deployment.id }}
+        PUBLISH_STATE: ${{ steps.publish.outputs.state }}
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        previews: 'ant-man,flash'
+        script: |
+          const name = context.payload.deployment.payload.name;
+          const version = context.payload.deployment.payload.version;
+          const npmUrl = `https://www.npmjs.com/package/${name}/v/${version}`;
+
+          const state = process.env.PUBLISH_STATE === 'done' ? 'success' : 'failure';
+
+          const { data: deploymentStatus } = github.repos.createDeploymentStatus({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            deployment_id: process.env.DEPLOYMENT_ID,
+            environment_url: npmUrl,
+            description: `Deployed ${name}@${version} on npm`,
+            auto_inactive: false,
+            state,
+          });
