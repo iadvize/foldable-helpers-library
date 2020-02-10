@@ -1,7 +1,7 @@
 {
-  "name": "@iadvize-oss/hello-world",
-  "version": "0.1.8-beta.1",
-  "description": "Say hello",
+  "name": "@iadvize-oss/foldable-helpers",
+  "version": "0.0.0",
+  "description": "Typescript helpers to fold on sum types",
   "main": "dist/index.js",
   "module": "esm/index.js",
   "types": "dist/index.d.ts",
@@ -17,16 +17,15 @@
     "bump-changelog": "VERSION=$(cat package.json | jq '.version') && remark CHANGELOG.md -o --use @jarrodldavis/changelog-version-bump=version:$VERSION && git add CHANGELOG.md",
     "docs": "typedoc"
   },
-  "homepage": "https://github.com/iadvize/hello-world-javascript-library#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iadvize/hello-world-javascript-library.git"
+    "url": "git+https://github.com/iadvize/foldable-helpers-library.git"
   },
   "keywords": [
     "iAdvize"
   ],
   "bugs": {
-    "url": "https://github.com/iadvize/hello-world-javascript-library/issues"
+    "url": "https://github.com/iadvize/foldable-helpers-library/issues"
   },
   "author": "iAdvize developers",
   "license": "MIT",
@@ -36,6 +35,7 @@
     "@babel/preset-env": "^7.8.4",
     "@jarrodldavis/remark-changelog-version-bump": "^0.1.1",
     "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
     "@types/jest": "^25.1.2",
     "babel-jest": "^25.1.0",
     "jest": "^25.1.0",
@@ -48,5 +48,8 @@
     "tslib": "^1.10.0",
     "typedoc": "^0.16.9",
     "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "fp-ts": "^2.4.4"
   }
 }

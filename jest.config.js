@@ -6,6 +6,7 @@ module.exports = {
     '^.+\\.tsx?$': 'ts-jest',
     '^.+\\.jsx?$': 'babel-jest',
   },
+  transformIgnorePatterns: ['node_modules/(?!(fp-ts)/)'],
   globals: {
     'ts-jest': {
       isolatedModules: true,
