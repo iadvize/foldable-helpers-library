@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- misc: bump rollup-plugin-typescript2 from 0.25.3 to 0.26.0
+### Added
+
+- fold creators `createFold` and `createFoldObject`
+- helpers `combineGuards` and `not` to compose guards
 
 [Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v0.0.0...HEAD
