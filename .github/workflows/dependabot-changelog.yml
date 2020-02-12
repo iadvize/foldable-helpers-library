@@ -21,7 +21,7 @@ jobs:
       env:
         PULL_REQUEST_TITLE: ${{ github.event.pull_request.title }}
       run: |
-        sed -i "/^## \[Unreleased\]/a\\\n- $PULL_REQUEST_TITLE" CHANGELOG.md
+        sed -i "/^## \[Unreleased\]/a\\\n### Changed\\\n- $PULL_REQUEST_TITLE" CHANGELOG.md
 
     - name: Git config
       run: |
