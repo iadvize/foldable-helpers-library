@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2]
+
 ### Changed
-- misc: bump rollup from 1.31.0 to 1.31.1
+
+-   misc: bump rollup from 1.31.0 to 1.31.1
 
 ## [1.0.1]
 
@@ -23,7 +26,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   fold creators `createFold` and `createFoldObject`
 -   helpers `combineGuards` and `not` to compose guards
 
-[Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.2...HEAD
+
+[1.0.2]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.1...v1.0.2
 
 [1.0.1]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.0...v1.0.1
 
