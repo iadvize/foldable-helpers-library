@@ -7,8 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.3]
+
 ### Changed
-- misc: bump typedoc from 0.16.9 to 0.16.10
+
+-   misc: bump typedoc from 0.16.9 to 0.16.10
 
 ## [1.0.2]
 
@@ -29,7 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   fold creators `createFold` and `createFoldObject`
 -   helpers `combineGuards` and `not` to compose guards
 
-[Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.3...HEAD
+
+[1.0.3]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.2...v1.0.3
 
 [1.0.2]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.1...v1.0.2
 
