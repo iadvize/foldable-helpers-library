@@ -2,7 +2,7 @@ name: Pull request labels
 
 on:
   pull_request:
-    types: [labeled, unlabeled]
+    types: [labeled, unlabeled, synchronize]
 
 jobs:
   version-labels:

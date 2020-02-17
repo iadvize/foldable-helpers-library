@@ -2,7 +2,7 @@ name: Pull request assignee
 
 on:
   pull_request:
-    types: [assigned, unassigned]
+    types: [assigned, unassigned, synchronize]
 
 jobs:
   assignee:
