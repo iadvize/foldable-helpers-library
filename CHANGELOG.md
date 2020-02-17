@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- misc: bump typedoc from 0.16.9 to 0.16.10
+
 ## [1.0.2]
 
 ### Changed
