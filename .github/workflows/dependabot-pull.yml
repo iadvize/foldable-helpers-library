@@ -1,10 +1,29 @@
-name: Dependabot changelog addition
+name: Dependabot pull additions
 
 on:
   pull_request:
     types: [opened]
 
 jobs:
+  add-assignee:
+    name: 'add assignee'
+    runs-on: ubuntu-18.04
+
+    if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
+
+    steps:
+    - name: Add assignee
+      uses: actions/github-script@0.4.0
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
+        script: |
+          const { data: deployment } = await github.issues.addAssignees({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.payload.pull_request.number,
+            assignees: ['iadvizeponey']
+          });
+
   update-changelog:
     name: 'update changelog'
     runs-on: ubuntu-18.04
