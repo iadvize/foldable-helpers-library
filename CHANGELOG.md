@@ -7,14 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-### Changed
-- misc: bump fp-ts from 2.5.0 to 2.5.1
+## [1.0.4]
 
 ### Changed
-- misc: bump @types/jest from 25.1.2 to 25.1.3
+
+-   misc: bump fp-ts from 2.5.0 to 2.5.1
 
 ### Changed
-- misc: bump ts-jest from 25.2.0 to 25.2.1
+
+-   misc: bump @types/jest from 25.1.2 to 25.1.3
+
+### Changed
+
+-   misc: bump ts-jest from 25.2.0 to 25.2.1
 
 ## [1.0.3]
 
@@ -41,7 +46,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   fold creators `createFold` and `createFoldObject`
 -   helpers `combineGuards` and `not` to compose guards
 
-[Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.3...HEAD
+[Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.4...HEAD
+
+[1.0.4]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.3...v1.0.4
 
 [1.0.3]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.2...v1.0.3
 
