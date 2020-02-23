@@ -17,11 +17,18 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
         script: |
-          const { data: deployment } = await github.issues.addAssignees({
+          await github.issues.addAssignees({
             owner: context.repo.owner,
             repo: context.repo.repo,
             issue_number: context.payload.pull_request.number,
             assignees: ['iadvizeponey']
+          });
+
+          await github.pulls.createReview({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.payload.pull_request.number,
+            event: "APPROVE",
           });
 
   update-changelog:
