@@ -8,4 +8,8 @@ update_configs:
     commit_message:
       prefix: "misc"
     default_labels:
-      - "patch"
+      - "no-release"
+    automerged_updates:
+      - match:
+          dependency_type: "development"
+          update_type: "in_range"
