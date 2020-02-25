@@ -34,8 +34,8 @@ describe('createFold', () => {
       type1,
       fold(
         () => 'result1',
-        () => 'result2'
-      )
+        () => 'result2',
+      ),
     );
 
     expect(result1).toEqual('result1');
@@ -45,8 +45,8 @@ describe('createFold', () => {
       type2,
       fold(
         () => 'result1',
-        () => 'result2'
-      )
+        () => 'result2',
+      ),
     );
 
     expect(result2).toEqual('result2');
@@ -59,7 +59,7 @@ describe('createFold', () => {
       isType3,
       isType4,
       isType5,
-      isType6
+      isType6,
     );
 
     const tags = range(1, 6);
@@ -77,25 +77,20 @@ describe('createFold', () => {
         const result = pipe(oneType, foldFunction);
 
         expect(result).toEqual(t);
-      })
+      }),
     );
   });
 
   it('created fold should throw if no guard found', () => {
-    const fold = createFold(
-      isType1,
-      isType2,
-    );
+    const fold = createFold(isType1, isType2);
 
     const tag = { tag: 3 };
-    const someFunc = fold<{ tag: number }>(
-      identity,
-      identity,
-    );
+    const someFunc = fold<{ tag: number }>(identity, identity);
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     const funcThatWillThrow = () => someFunc(tag);
 
-    expect(funcThatWillThrow).toThrow();
+    expect(funcThatWillThrow).toThrowErrorMatchingSnapshot();
   });
 });

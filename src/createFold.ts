@@ -26,8 +26,8 @@ export function createFold<Types extends any[]>(...guards: Guardify<Types>) {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           ([_, func]) => {
             return func(s);
-          }
-        )
+          },
+        ),
       );
     };
   };

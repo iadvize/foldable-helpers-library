@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createFold created fold should throw if no guard found 1`] = `"No guard found to fold [object Object]"`;

@@ -38,7 +38,7 @@ describe('createFoldObject', () => {
       fold({
         type1: () => 'result1',
         type2: () => 'result2',
-      })
+      }),
     );
 
     expect(result1).toEqual('result1');
@@ -49,7 +49,7 @@ describe('createFoldObject', () => {
       fold({
         type1: () => 'result1',
         type2: () => 'result2',
-      })
+      }),
     );
 
     expect(result2).toEqual('result2');
@@ -84,7 +84,7 @@ describe('createFoldObject', () => {
         const result = pipe(oneType, foldFunction);
 
         expect(result).toEqual(`result${t}`);
-      })
+      }),
     );
   });
 
@@ -100,9 +100,10 @@ describe('createFoldObject', () => {
       type2: identity,
     });
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     const funcThatWillThrow = () => someFunc(tag);
 
-    expect(funcThatWillThrow).toThrow();
+    expect(funcThatWillThrow).toThrowErrorMatchingSnapshot();
   });
 });
