@@ -30,33 +30,3 @@ jobs:
             pull_number: context.payload.pull_request.number,
             event: "APPROVE",
           });
-
-  update-changelog:
-    name: 'update changelog'
-    runs-on: ubuntu-18.04
-
-    if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
-
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        ref: ${{ github.event.pull_request.head.ref }}
-        token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
-
-    - name: Update changelog
-      env:
-        PULL_REQUEST_TITLE: ${{ github.event.pull_request.title }}
-      run: |
-        sed -i "/^## \[Unreleased\]/a\\\n- $PULL_REQUEST_TITLE" CHANGELOG.md
-
-    - name: Git config
-      run: |
-        git config user.name "Github actions"
-        git config user.email "github-actions@iadvize.com"
-
-    - name: Push
-      run: |
-        git add CHANGELOG.md
-        git commit -m "documentation: update changelog for dependency bump"
-        git push
-
