@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "@iadvize-oss/eslint-config",
+    "@iadvize-oss/eslint-config-jest"
+  ],
+  "parserOptions": {
+    "project": "./.eslint.tsconfig.json"
+  },
+}
+

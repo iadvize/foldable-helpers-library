@@ -9,12 +9,12 @@ export function createFoldObject<TypesRecord extends Record<string, any>>(
   guards: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key in keyof TypesRecord]: Guard<any, TypesRecord[key]>;
-  }
+  },
 ) {
   return function<R>(
     funcs: {
       [key in keyof TypesRecord]: Func<TypesRecord[key], R>;
-    }
+    },
   ) {
     // need & string here to filter number and symbol
     type Names = keyof TypesRecord & string;
@@ -37,8 +37,8 @@ export function createFoldObject<TypesRecord extends Record<string, any>>(
           // applied to s
           key => {
             return funcs[key](s);
-          }
-        )
+          },
+        ),
       );
     };
   };

@@ -13,7 +13,7 @@ export function combineGuards<
   return (t: IntersectionOfInputTypes): t is IntersectionOfOutputTypes => {
     return guards.reduce(
       (acc: boolean, guard: Guard<unknown, unknown>) => acc && guard(t),
-      true
+      true,
     );
   };
 }

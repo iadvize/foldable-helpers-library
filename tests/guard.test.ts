@@ -33,19 +33,19 @@ describe('not', () => {
 
   it('should work well with combineGuards', () => {
     expect(
-      combineGuards(isTypeA, isTypeB, not(isTypeC))({ a: 'toto', b: 1 })
+      combineGuards(isTypeA, isTypeB, not(isTypeC))({ a: 'toto', b: 1 }),
     ).toBe(true);
     expect(
-      combineGuards(isTypeA, isTypeB, not(isTypeC))({ a: 'test', b: 1 })
+      combineGuards(isTypeA, isTypeB, not(isTypeC))({ a: 'test', b: 1 }),
     ).toBe(false);
     expect(
-      combineGuards(isTypeA, not(isTypeB), isTypeC)({ a: 'test', b: null })
+      combineGuards(isTypeA, not(isTypeB), isTypeC)({ a: 'test', b: null }),
     ).toBe(true);
     expect(
-      combineGuards(isTypeA, not(isTypeB), isTypeC)({ a: 'test', b: 'Hello' })
+      combineGuards(isTypeA, not(isTypeB), isTypeC)({ a: 'test', b: 'Hello' }),
     ).toBe(true);
     expect(
-      combineGuards(isTypeA, not(isTypeB), isTypeC)({ a: 'test', b: 1 })
+      combineGuards(isTypeA, not(isTypeB), isTypeC)({ a: 'test', b: 1 }),
     ).toBe(false);
   });
 });
