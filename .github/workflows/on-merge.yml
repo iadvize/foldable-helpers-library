@@ -57,103 +57,19 @@ jobs:
         git commit -m "documentation: generate new documentation"
         git push origin gh-pages
 
-  publish-beta:
-    name: 'create beta version and deploy'
+  publish:
+    name: 'create version and deploy'
     runs-on: ubuntu-18.04
 
     needs:
     - generate-docs
 
-    if:
-      github.event.pull_request.merged == true && !(
-        contains(github.event.pull_request.labels.*.name, 'patch')
-      || contains(github.event.pull_request.labels.*.name, 'minor')
-      || contains(github.event.pull_request.labels.*.name, 'major')
-      )
-
-    steps:
-    - uses: actions/checkout@v2-beta
-      with:
-        ref: master
-        token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
-
-    - name: Git config
-      run: |
-        git config user.name "Github actions"
-        git config user.email "github-actions@iadvize.com"
-
-    - uses: actions/setup-node@v1
-      with:
-        node-verion: '12.x'
-
-    - name: Install
-      run: npm ci
-
-    - name: Set beta version
-      id: version
-      run: |
-        npm version prerelease --preid=beta
-        git push
-        git push --tags
-
-    - name: Push on master
-      id: push
-      run: |
-        git push
-        git push --tags
-
-        COMMIT_ID=$(git rev-parse HEAD)
-        echo "::set-output name=ref::$COMMIT_ID"
-
-        VERSION=$(cat package.json | jq -r '.version')
-        echo "::set-output name=version::$VERSION"
-
-        NAME=$(cat package.json | jq -r '.name')
-        echo "::set-output name=name::$NAME"
-
-    - name: Create deployment
-      id: deployment
-      uses: actions/github-script@0.4.0
-      env:
-        REF: ${{ steps.push.outputs.ref }}
-        VERSION: ${{ steps.push.outputs.VERSION }}
-        NAME: ${{ steps.push.outputs.NAME }}
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
-        previews: 'ant-man-preview,flash-preview'
-        script: |
-          const name = process.env.name;
-          const version = process.env.VERSION;
-
-          const { data: deployment } = await github.repos.createDeployment({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            ref: `v${version}`,
-            environment: 'npm',
-            auto_merge: false,
-            required_contexts: [],
-            payload: {
-              version,
-              name,
-              ref: process.env.REF,
-              npmTag: 'beta',
-            },
-            description: `Deploy ${name}@${version} on npm`,
-            production_environment: true,
-          });
-
-  publish-latest:
-    name: 'create latest version and deploy'
-    runs-on: ubuntu-18.04
-
-    needs:
-    - generate-docs
-
-    if:
+    if: >
       github.event.pull_request.merged == true && (
-        contains(github.event.pull_request.labels.*.name, 'patch')
-      || contains(github.event.pull_request.labels.*.name, 'minor')
-      || contains(github.event.pull_request.labels.*.name, 'major')
+        contains(github.event.pull_request.labels.*.name, 'Action: patch bump')
+      || contains(github.event.pull_request.labels.*.name, 'Action: minor bump')
+      || contains(github.event.pull_request.labels.*.name, 'Action: major bump')
+      || contains(github.event.pull_request.labels.*.name, 'Action: beta bump')
       )
 
     steps:
@@ -180,16 +96,19 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
-          const versionLabels = [
-            'patch',
-            'minor',
-            'major',
-          ];
+          const versionLabels = {
+            'Action: patch bump': 'patch',
+            'Action: minor bump': 'minor',
+            'Action: major bump': 'major',
+            'Action: beta bump': 'beta',
+          };
+
+          const versionLabelsNames = Object.keys(versionLabels);
 
           const labels = context.payload.pull_request.labels;
 
           const versionLabelsPresent = labels
-            .filter(label => versionLabels.includes(label.name))
+            .filter(label => versionLabelsNames.includes(label.name))
 
           console.log(`::debug ::${versionLabelsPresent.length} matching labels`);
 
@@ -198,17 +117,18 @@ jobs:
           }
 
           if (versionLabelsPresent.length === 1) {
-            console.log('::set-output name=version-changed::true');
-            console.log(`::set-output name=label::${versionLabelsPresent[0].name}`)
+            const versionBump = versionLabels[versionLabelsPresent[0].name];
+
+            console.log(`::set-output name=versionBump::${versionBump}`)
+
             return;
           }
 
-          console.log('::set-output name=version-changed::false');
-
-    - name: Bumb version
+    - name: Bumb classic version
+      if: steps.extract-version-label.outputs.versionBump != 'beta'
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        BUMP_TYPE: ${{ steps.extract-version-label.outputs.label }}
+        BUMP_TYPE: ${{ steps.extract-version-label.outputs.versionBump }}
       run: |
         npm --no-git-tag-version version $BUMP_TYPE
 
@@ -220,6 +140,11 @@ jobs:
         git commit -m "$VERSION"
 
         git tag "v$VERSION"
+
+    - name: Bumb beta version
+      if: steps.extract-version-label.outputs.versionBump == 'beta'
+      run: |
+        npm version prerelease --preid=beta
 
     - name: Push on master
       id: push
@@ -269,6 +194,7 @@ jobs:
 
     - name: Extract release changelog
       id: extract-changelog
+      if: steps.extract-version-label.outputs.versionBump != 'beta'
       run: |
         VERSION=$(cat package.json | jq -r '.version')
         VERSION_PART=$(sed -n "/## \[$VERSION\]/,/## \[/{/## \[/d;p;}" CHANGELOG.md)
@@ -281,6 +207,7 @@ jobs:
         echo "::set-output name=version-part::$VERSION_PART"
 
     - name: Create Release
+      if: steps.extract-version-label.outputs.versionBump != 'beta'
       uses: actions/github-script@0.4.0
       env:
         VERSION: ${{ steps.push.outputs.version }}

@@ -40,5 +40,5 @@ jobs:
         # @see https://help.github.com/en/articles/events-that-trigger-workflows#event-restrictions
         token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
         pullNumber: ${{ (github.event.pull_request && github.event.pull_request.number) || steps.pr.outputs.pullNumber }}
-        label: 'keep-rebased-then-merge'
+        label: 'Action: keep-rebased-then-merge'
 

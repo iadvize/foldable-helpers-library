@@ -27,6 +27,6 @@ jobs:
         # with the GITHUB_TOKEN
         # @see https://help.github.com/en/articles/events-that-trigger-workflows#event-restrictions
         token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
-        label: 'keep-rebased-then-merge'
+        label: 'Action: keep-rebased-then-merge'
         onlyOnce: true
 

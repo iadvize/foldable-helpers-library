@@ -8,7 +8,7 @@ update_configs:
     commit_message:
       prefix: "misc"
     default_labels:
-      - "no-release"
+      - "Action: no bump"
     automerged_updates:
       - match:
           dependency_type: "development"

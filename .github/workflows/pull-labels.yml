@@ -16,10 +16,11 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           const versionLabels = [
-            'no-release',
-            'patch',
-            'minor',
-            'major',
+            'Action: no bump',
+            'Action: beta bump',
+            'Action: patch bump',
+            'Action: minor bump',
+            'Action: major bump',
           ];
 
           const { data: labels } = await github.issues.listLabelsOnIssue({
@@ -38,4 +39,4 @@ jobs:
 
           console.log(`::debug ::${versionLabelsPresent.length} matching labels`);
 
-          throw new Error('Should have one and only one of no-release, patch, minor, major labels');
+          throw new Error(`Should have one and only one of ${versionLabels.join(', ')} labels`);
