@@ -54,7 +54,7 @@ jobs:
         cd gh-pages-content
 
         git add .
-        git commit -m "documentation: generate new documentation"
+        git commit -m --allow-empty "documentation: generate new documentation"
         git push origin gh-pages
 
   publish:
