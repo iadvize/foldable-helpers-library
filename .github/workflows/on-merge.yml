@@ -168,12 +168,16 @@ jobs:
         REF: ${{ steps.push.outputs.ref }}
         VERSION: ${{ steps.push.outputs.VERSION }}
         NAME: ${{ steps.push.outputs.NAME }}
+        VERSION_BUMP: ${{ steps.extract-version-labels.outputs.versionBump }}
       with:
         github-token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
         previews: 'ant-man-preview,flash-preview'
         script: |
+          const ref = process.env.REF;
           const name = process.env.NAME;
           const version = process.env.VERSION;
+
+          const npmTag = process.env.VERSION_BUMP === 'beta' ? 'beta' : 'latest';
 
           const { data: deployment } = await github.repos.createDeployment({
             owner: context.repo.owner,
@@ -185,8 +189,8 @@ jobs:
             payload: {
               version,
               name,
-              ref: process.env.REF,
-              npmTag: 'latest',
+              ref,
+              npmTag,
             },
             description: `Deploy ${name}@${version} on npm`,
             production_environment: true,
