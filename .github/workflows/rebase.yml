@@ -17,7 +17,7 @@ jobs:
     - name: 'Checkout repository'
       uses: actions/checkout@v2
       with:
-        ref: ${{ github.sha }}
+        fetch-depth: 0
         token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
 
     - name: 'Rebase one pull request based on master with label'
