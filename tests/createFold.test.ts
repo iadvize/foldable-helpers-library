@@ -65,7 +65,7 @@ describe('createFold', () => {
     const tags = range(1, 6);
     const funcs = pipe(tags, map(constant));
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const foldFunction = fold(...funcs);
 
@@ -87,7 +87,7 @@ describe('createFold', () => {
     const tag = { tag: 3 };
     const someFunc = fold<{ tag: number }>(identity, identity);
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const funcThatWillThrow = () => someFunc(tag);
 
