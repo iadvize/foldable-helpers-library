@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>@iadvize-oss/foldable-helpers - v1.0.5-beta.2</title>
-	<meta name="description" content="">
+	<meta name="description" content="Documentation for @iadvize-oss/foldable-helpers - v1.0.5-beta.2">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -13,7 +13,7 @@
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -76,7 +76,7 @@
 				<p>First, install the library:</p>
 				<pre><code class="language-bash">yarn add @iadvize-oss/foldable-helpers</code></pre>
 				<p><a href="https://iadvize.github.io/foldable-helpers-library/">📖 Documentation</a></p>
-				<a href="#classic-fold---codecreatefoldcode" id="classic-fold---codecreatefoldcode" style="color: inherit; text-decoration: none;">
+				<a href="#classic-fold---createfold" id="classic-fold---createfold" style="color: inherit; text-decoration: none;">
 					<h2>Classic fold - <code>createFold</code></h2>
 				</a>
 				<p>You have a sum type and the type guards for each of the types. For example:</p>
@@ -102,7 +102,7 @@ pipe(
     <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'executed when t is C'</span>, { tbis }),
   ),
 );</code></pre>
-				<a href="#named-fold---codecreatefoldobjectcode" id="named-fold---codecreatefoldobjectcode" style="color: inherit; text-decoration: none;">
+				<a href="#named-fold---createfoldobject" id="named-fold---createfoldobject" style="color: inherit; text-decoration: none;">
 					<h2>Named fold - <code>createFoldObject</code></h2>
 				</a>
 				<p>Classic fold is very useful but could become hard to read when we have more than
@@ -139,7 +139,7 @@ pipe(
     onC: <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'executed when t is C'</span>, { tbis }),
   }),
 );</code></pre>
-				<a href="#codecombineguardscode" id="codecombineguardscode" style="color: inherit; text-decoration: none;">
+				<a href="#combineguards" id="combineguards" style="color: inherit; text-decoration: none;">
 					<h2><code>combineGuards</code></h2>
 				</a>
 				<p>When using fold you will probably encounter cases where a type is a combination (union) of different guards
@@ -157,7 +157,7 @@ pipe(
     isTypeA(value) &amp;&amp; isTypeB(value);
 
 <span class="hljs-keyword">const</span> isTypeAAndB = combineGuards(isTypeA, isTypeB); <span class="hljs-comment">// :(t: any): t is A &amp; B =&gt; boolean</span></code></pre>
-				<a href="#codenotcode" id="codenotcode" style="color: inherit; text-decoration: none;">
+				<a href="#not" id="not" style="color: inherit; text-decoration: none;">
 					<h2><code>not</code></h2>
 				</a>
 				<p>When using createFold you <strong>need to make sure that each guard mutually excludes the others</strong> but it can sometimes be painfull if one type depends on another, therefore we let you use the <code>not</code> operator to exclude a guard</p>
