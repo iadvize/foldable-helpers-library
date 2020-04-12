@@ -37,7 +37,7 @@
     "@iadvize-oss/eslint-config-jest": "^0.0.5",
     "@jarrodldavis/remark-changelog-version-bump": "^0.1.1",
     "@rollup/plugin-commonjs": "^11.1.0",
-    "@rollup/plugin-node-resolve": "^7.1.1",
+    "@rollup/plugin-node-resolve": "^7.1.2",
     "@types/jest": "^25.2.1",
     "babel-jest": "^25.3.0",
     "eslint": "^6.8.0",
