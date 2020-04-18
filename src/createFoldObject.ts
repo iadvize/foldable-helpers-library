@@ -1,34 +1,34 @@
-import { findFirst } from 'fp-ts/es6/Array';
-import { fromOption, fold } from 'fp-ts/es6/Either';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import * as ArrayFP from 'fp-ts/es6/Array';
+import * as Either from 'fp-ts/es6/Either';
 import { pipe } from 'fp-ts/es6/pipeable';
 
 import { Guard, Func } from './types';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Guards<TypesRecord extends Record<string, any>> = {
+  [key in keyof TypesRecord]: Guard<any, TypesRecord[key]>;
+};
+
 export function createFoldObject<TypesRecord extends Record<string, any>>(
-  guards: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key in keyof TypesRecord]: Guard<any, TypesRecord[key]>;
-  },
+  guards: Guards<TypesRecord>,
 ) {
-  return function<R>(
-    funcs: {
-      [key in keyof TypesRecord]: Func<TypesRecord[key], R>;
-    },
-  ) {
-    // need & string here to filter number and symbol
-    type Names = keyof TypesRecord & string;
+  type FoldFunctions<TypesRecord extends Record<string, any>, R> = {
+    [key in keyof TypesRecord]: Func<TypesRecord[key], R>;
+  };
 
-    type AllTypes = TypesRecord[Names];
+  type Instance<
+    TypesRecord extends Record<string, any>
+  > = TypesRecord[keyof TypesRecord & string];
 
-    return (s: AllTypes): R => {
+  return function fold<R>(funcs: FoldFunctions<TypesRecord, R>) {
+    return (s: Instance<TypesRecord>): R => {
       const keys = Object.keys(guards);
 
       return pipe(
         keys,
-        findFirst(key => guards[key](s)),
-        fromOption(() => new Error(`No guard found to fold ${s}`)),
-        fold(
+        ArrayFP.findFirst(key => guards[key](s)),
+        Either.fromOption(() => new Error(`No guard found to fold ${s}`)),
+        Either.fold(
           // if no key found, we throw error, guards are broken
           error => {
             throw error;
