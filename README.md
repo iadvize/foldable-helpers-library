@@ -22,11 +22,12 @@ npm add @iadvize-oss/foldable-helpers
 You have a sum type and the type guards for each of the types. For example:
 
 ```ts
-type T = A | B | C;
+type T = A | B | C | D;
 
 function isA(t: T): t is A { ... }
 function isB(t: T): t is B { ... }
 function isC(t: T): t is C { ... }
+function isD(t: T): t is D { ... }
 ```
 
 To create a named fold function to fold on `T`, use `createFoldObject`. You
@@ -40,7 +41,8 @@ import { createFoldObject } from '@iadvize-oss/foldable-helpers';
 const foldOnT = createFoldObject({
   onA: isA,
   onB: isB,
-  onC: isC
+  onC: isC,
+  onD: isD,
 });
 
 const t: T = ...;
@@ -51,9 +53,27 @@ pipe(
     onA: (tbis) => console.log('executed when t is A', { tbis }),
     onB: (tbis) => console.log('executed when t is B', { tbis }),
     onC: (tbis) => console.log('executed when t is C', { tbis }),
+    onD: (tbis) => console.log('executed when t is D', { tbis }),
   }),
 );
 ```
+
+### Default clause
+
+You can use `_` as a "catch all" clause if you don't want to handle all types
+independently.
+
+```ts
+pipe(
+  t,
+  foldOnT({
+    onA: (tbis) => console.log('executed when t is A', { tbis }),
+    onB: (tbis) => console.log('executed when t is B', { tbis }),
+    _:   (tbis) => console.log('executed when t is not A nor B', { tbis }),
+  }),
+);
+```
+
 
 ## Classic fold - `createFold`
 

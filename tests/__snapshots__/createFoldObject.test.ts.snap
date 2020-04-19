@@ -1,3 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`createFoldObject created fold should throw if clause function found 1`] = `"No \\"type2\\" nor \\"_\\" clause passed to fold"`;
+
+exports[`createFoldObject created fold should throw if clause is not a function 1`] = `"\\"type2\\" clause should be a function"`;
+
+exports[`createFoldObject created fold should throw if default clause is not a function 1`] = `"\\"_\\" clause should be a function"`;
+
 exports[`createFoldObject created fold should throw if no guard found 1`] = `"No guard found to fold [object Object]"`;

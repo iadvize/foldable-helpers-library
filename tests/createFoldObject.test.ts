@@ -106,4 +106,98 @@ describe('createFoldObject', () => {
 
     expect(funcThatWillThrow).toThrowErrorMatchingSnapshot();
   });
+
+  it('created fold should accept a default clause', () => {
+    const fold = createFoldObject({
+      type1: isType1,
+      type2: isType2,
+      type3: isType3,
+      type4: isType4,
+      type5: isType5,
+      type6: isType6,
+    });
+
+    const result1 = pipe(
+      { tag: 1 },
+      fold({
+        type1: () => 'result1',
+        _: () => 'default',
+      }),
+    );
+
+    expect(result1).toEqual(`result1`);
+
+    const result2 = pipe(
+      { tag: 2 },
+      fold({
+        type1: () => 'result1',
+        _: () => 'default',
+      }),
+    );
+
+    expect(result2).toEqual(`default`);
+  });
+
+  it('created fold should throw if clause function found', () => {
+    const fold = createFoldObject({
+      type1: isType1,
+      type2: isType2,
+    });
+
+    const tag = { tag: 2 };
+    const someFunc = fold<{ tag: number }>({
+      type1: identity,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore - testing behavior without type safety
+      type3: identity,
+    });
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const funcThatWillThrow = () => someFunc(tag);
+
+    expect(funcThatWillThrow).toThrowErrorMatchingSnapshot();
+  });
+
+  it('created fold should throw if clause is not a function', () => {
+    const fold = createFoldObject({
+      type1: isType1,
+      type2: isType2,
+    });
+
+    const tag = { tag: 2 };
+    const someFunc = fold<{ tag: number }>({
+      type1: identity,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore - testing behavior without type safety
+      type2: 'toto',
+    });
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const funcThatWillThrow = () => someFunc(tag);
+
+    expect(funcThatWillThrow).toThrowErrorMatchingSnapshot();
+  });
+
+  it('created fold should throw if default clause is not a function', () => {
+    const fold = createFoldObject({
+      type1: isType1,
+      type2: isType2,
+    });
+
+    const tag = { tag: 2 };
+    const someFunc = fold<{ tag: number }>({
+      type1: identity,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore - testing behavior without type safety
+      _: 'toto',
+    });
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    const funcThatWillThrow = () => someFunc(tag);
+
+    expect(funcThatWillThrow).toThrowErrorMatchingSnapshot();
+  });
 });
