@@ -12,65 +12,25 @@ be used in standard Javascript apps.
 First, install the library:
 
 ```bash
-yarn add @iadvize-oss/foldable-helpers
+npm add @iadvize-oss/foldable-helpers
 ```
 
 [📖 Documentation](https://iadvize.github.io/foldable-helpers-library/)
 
-## Classic fold - `createFold`
+## Named fold - `createFoldObject`
 
 You have a sum type and the type guards for each of the types. For example:
 
 ```ts
 type T = A | B | C;
 
-function isA(t: T): t is A { ... };
-function isB(t: T): t is B { ... };
-function isC(t: T): t is C { ... };
+function isA(t: T): t is A { ... }
+function isB(t: T): t is B { ... }
+function isC(t: T): t is C { ... }
 ```
 
-To create a fold function to fold on `T`, use `createFold`
-
-```ts
-import { pipe } from 'fp-ts/es6/pipeable';
-
-import { createFold } from '@iadvize-oss/foldable-helpers';
-
-const foldOnT = createFold(isA, isB, isC);
-
-const t: T = ...;
-
-pipe(
-  t,
-  foldOnT(
-    (tbis) => console.log('executed when t is A', { tbis }),
-    (tbis) => console.log('executed when t is B', { tbis }),
-    (tbis) => console.log('executed when t is C', { tbis }),
-  ),
-);
-```
-
-## Named fold - `createFoldObject`
-
-Classic fold is very useful but could become hard to read when we have more than
-3-4 types to fold on.
-Because we don't have named parameters in JS/Typescript, we have to use
-something else.
-
-You still have a sum type and the type guards for each of the types.
-For example:
-
-```ts
-type T = A | B | C;
-
-function isA(t: T): t is A { ... };
-function isB(t: T): t is B { ... };
-function isC(t: T): t is C { ... };
-```
-
-To create a named fold function to fold on `T` without loosing readability,
-use `createFoldObject`. You choose the name of each fold function by passing
-an object.
+To create a named fold function to fold on `T`, use `createFoldObject`. You
+choose the name of each fold function by passing an object.
 
 ```ts
 import { pipe } from 'fp-ts/es6/pipeable';
@@ -95,10 +55,48 @@ pipe(
 );
 ```
 
+## Classic fold - `createFold`
+
+You have a sum type and the type guards for each of the types. For example:
+
+```ts
+type T = A | B | C;
+
+function isA(t: T): t is A { ... }
+function isB(t: T): t is B { ... }
+function isC(t: T): t is C { ... }
+```
+
+To create a fold function to fold on `T`, use `createFold`
+
+```ts
+import { pipe } from 'fp-ts/es6/pipeable';
+
+import { createFold } from '@iadvize-oss/foldable-helpers';
+
+const foldOnT = createFold(isA, isB, isC);
+
+const t: T = ...;
+
+pipe(
+  t,
+  foldOnT(
+    (tbis) => console.log('executed when t is A', { tbis }),
+    (tbis) => console.log('executed when t is B', { tbis }),
+    (tbis) => console.log('executed when t is C', { tbis }),
+  ),
+);
+```
+
+Classic fold is very useful but could become hard to read when we have more than
+3-4 types to fold on. You probably want to use `createFoldObject` in that case.
+
+
 ## `combineGuards`
 
-When using fold you will probably encounter cases where a type is a combination (union) of different guards
-to reduce the boilerplate having to write each combination by hand you can use the `combineGuards` helper.
+When using fold you will probably encounter cases where a type is a combination
+(union) of different guards. Oo reduce the boilerplate of having to write each
+combination by hand you can use the `combineGuards` helper.
 
 ```ts
 type A = { a: string };
@@ -113,16 +111,19 @@ const isTypeB = (value: any): value is B =>
 const oldIsTypeAAndB = (value: any): value is A & B =>
     isTypeA(value) && isTypeB(value);
 
-const isTypeAAndB = combineGuards(isTypeA, isTypeB); // :(t: any): t is A & B => boolean
+const isTypeAAndB = combineGuards(isTypeA, isTypeB);
+// (t: any): t is A & B => boolean
 ```
 
 ## `not`
 
-When using createFold you **need to make sure that each guard mutually excludes the others** but it can sometimes be painfull if one type depends on another, therefore we let you use the `not` operator to exclude a guard
+When using createFold you **need to make sure that each guard mutually excludes
+the others** but it can sometimes be painfull if one type depends on another,
+therefore we let you use the `not` operator to exclude a guard
 
 ```ts
-type TypeA = { a: string};
-type TypeB = { a: 'test'};
+type TypeA = { a: string };
+type TypeB = { a: 'test' };
 
 const isTypeA = (value: {a: unknown}): value is TypeA => typeof value.a === 'string';
 const isTypeB = (value: TypeA): value is TypeB => value.a === 'test';
