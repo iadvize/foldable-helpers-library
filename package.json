@@ -50,7 +50,7 @@
     "ts-jest": "^25.5.1",
     "tslib": "^2.0.0",
     "typedoc": "^0.17.7",
-    "typescript": "^3.8.3"
+    "typescript": "^3.9.3"
   },
   "dependencies": {
     "fp-ts": "^2.6.1"
