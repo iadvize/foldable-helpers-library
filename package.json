@@ -38,7 +38,7 @@
     "@jarrodldavis/remark-changelog-version-bump": "^0.1.1",
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
-    "@types/jest": "^25.2.3",
+    "@types/jest": "^26.0.0",
     "babel-jest": "^26.0.1",
     "eslint": "^6.8.0",
     "jest": "^25.5.4",
