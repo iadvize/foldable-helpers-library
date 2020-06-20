@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.5]
+
 ### Changed
 
 -   Update libs
@@ -50,7 +52,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   fold creators `createFold` and `createFoldObject`
 -   helpers `combineGuards` and `not` to compose guards
 
-[Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.4...HEAD
+[Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.5...HEAD
+
+[1.0.5]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.4...v1.0.5
 
 [1.0.4]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.3...v1.0.4
 
