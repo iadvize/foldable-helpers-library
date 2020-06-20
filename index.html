@@ -86,9 +86,9 @@
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isB</span>(<span class="hljs-params">t: T</span>): <span class="hljs-title">t</span> <span class="hljs-title">is</span> <span class="hljs-title">B</span> </span>{ ... };
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isC</span>(<span class="hljs-params">t: T</span>): <span class="hljs-title">t</span> <span class="hljs-title">is</span> <span class="hljs-title">C</span> </span>{ ... };</code></pre>
 				<p>To create a fold function to fold on <code>T</code>, use <code>createFold</code></p>
-				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { pipe } <span class="hljs-keyword">from</span> <span class="hljs-string">'fp-ts/es6/pipeable'</span>;
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { pipe } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;fp-ts/es6/pipeable&#x27;</span>;
 
-<span class="hljs-keyword">import</span> { createFold } <span class="hljs-keyword">from</span> <span class="hljs-string">'@iadvize-oss/foldable-helpers'</span>;
+<span class="hljs-keyword">import</span> { createFold } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@iadvize-oss/foldable-helpers&#x27;</span>;
 
 <span class="hljs-keyword">const</span> foldOnT = createFold(isA, isB, isC);
 
@@ -97,9 +97,9 @@
 pipe(
   t,
   foldOnT(
-    <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'executed when t is A'</span>, { tbis }),
-    <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'executed when t is B'</span>, { tbis }),
-    <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'executed when t is C'</span>, { tbis }),
+    <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;executed when t is A&#x27;</span>, { tbis }),
+    <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;executed when t is B&#x27;</span>, { tbis }),
+    <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;executed when t is C&#x27;</span>, { tbis }),
   ),
 );</code></pre>
 				<a href="#named-fold---createfoldobject" id="named-fold---createfoldobject" style="color: inherit; text-decoration: none;">
@@ -119,9 +119,9 @@ pipe(
 				<p>To create a named fold function to fold on <code>T</code> without loosing readability,
 					use <code>createFoldObject</code>. You choose the name of each fold function by passing
 				an object.</p>
-				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { pipe } <span class="hljs-keyword">from</span> <span class="hljs-string">'fp-ts/es6/pipeable'</span>;
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { pipe } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;fp-ts/es6/pipeable&#x27;</span>;
 
-<span class="hljs-keyword">import</span> { createFoldObject } <span class="hljs-keyword">from</span> <span class="hljs-string">'@iadvize-oss/foldable-helpers'</span>;
+<span class="hljs-keyword">import</span> { createFoldObject } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@iadvize-oss/foldable-helpers&#x27;</span>;
 
 <span class="hljs-keyword">const</span> foldOnT = createFoldObject({
   onA: isA,
@@ -134,9 +134,9 @@ pipe(
 pipe(
   t,
   foldOnT({
-    onA: <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'executed when t is A'</span>, { tbis }),
-    onB: <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'executed when t is B'</span>, { tbis }),
-    onC: <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'executed when t is C'</span>, { tbis }),
+    onA: <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;executed when t is A&#x27;</span>, { tbis }),
+    onB: <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;executed when t is B&#x27;</span>, { tbis }),
+    onC: <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;executed when t is C&#x27;</span>, { tbis }),
   }),
 );</code></pre>
 				<a href="#combineguards" id="combineguards" style="color: inherit; text-decoration: none;">
@@ -148,10 +148,10 @@ pipe(
 <span class="hljs-keyword">type</span> B = { b: <span class="hljs-built_in">number</span> };
 
 <span class="hljs-keyword">const</span> isTypeA = (value: <span class="hljs-built_in">any</span>): value is A =&gt;
-  value != <span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-keyword">typeof</span> value.a === <span class="hljs-string">'string'</span>;
+  value != <span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-keyword">typeof</span> value.a === <span class="hljs-string">&#x27;string&#x27;</span>;
 
 <span class="hljs-keyword">const</span> isTypeB = (value: <span class="hljs-built_in">any</span>): value is B =&gt;
-  value != <span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-keyword">typeof</span> value.b === <span class="hljs-string">'number'</span>;
+  value != <span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-keyword">typeof</span> value.b === <span class="hljs-string">&#x27;number&#x27;</span>;
 
 <span class="hljs-keyword">const</span> oldIsTypeAAndB = (value: <span class="hljs-built_in">any</span>): value is A &amp; <span class="hljs-function"><span class="hljs-params">B</span> =&gt;</span>
     isTypeA(value) &amp;&amp; isTypeB(value);
@@ -162,10 +162,10 @@ pipe(
 				</a>
 				<p>When using createFold you <strong>need to make sure that each guard mutually excludes the others</strong> but it can sometimes be painfull if one type depends on another, therefore we let you use the <code>not</code> operator to exclude a guard</p>
 				<pre><code class="language-ts"><span class="hljs-keyword">type</span> TypeA = { a: <span class="hljs-built_in">string</span>};
-<span class="hljs-keyword">type</span> TypeB = { a: <span class="hljs-string">'test'</span>};
+<span class="hljs-keyword">type</span> TypeB = { a: <span class="hljs-string">&#x27;test&#x27;</span>};
 
-<span class="hljs-keyword">const</span> isTypeA = (value: {a: unknown}): value is TypeA =&gt; <span class="hljs-keyword">typeof</span> value.a === <span class="hljs-string">'string'</span>;
-<span class="hljs-keyword">const</span> isTypeB = (value: TypeA): value is TypeB =&gt; value.a === <span class="hljs-string">'test'</span>;
+<span class="hljs-keyword">const</span> isTypeA = (value: {a: unknown}): value is TypeA =&gt; <span class="hljs-keyword">typeof</span> value.a === <span class="hljs-string">&#x27;string&#x27;</span>;
+<span class="hljs-keyword">const</span> isTypeB = (value: TypeA): value is TypeB =&gt; value.a === <span class="hljs-string">&#x27;test&#x27;</span>;
 
 <span class="hljs-keyword">const</span> fold = createFoldObject({
   onTypeA: combineGuards(isTypeA, not(isTypeB)),
