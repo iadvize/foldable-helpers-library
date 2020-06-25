@@ -7,11 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0]
+
 ### Changed
 
 -   rename `combineGuards` as `and`
 
-### Added 
+### Added
 
 -   Add `or` guard helpers
 
@@ -60,7 +62,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   fold creators `createFold` and `createFoldObject`
 -   helpers `combineGuards` and `not` to compose guards
 
-[Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.5...HEAD
+[Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v2.0.0...HEAD
+
+[2.0.0]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.5...v2.0.0
 
 [1.0.5]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.4...v1.0.5
 

@@ -1,6 +1,6 @@
 {
   "name": "@iadvize-oss/foldable-helpers",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "description": "Typescript helpers to fold on sum types",
   "main": "dist/index.js",
   "module": "esm/index.js",
