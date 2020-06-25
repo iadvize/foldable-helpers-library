@@ -139,11 +139,12 @@ pipe(
     onC: <span class="hljs-function">(<span class="hljs-params">tbis</span>) =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;executed when t is C&#x27;</span>, { tbis }),
   }),
 );</code></pre>
-				<a href="#combineguards" id="combineguards" style="color: inherit; text-decoration: none;">
-					<h2><code>combineGuards</code></h2>
+				<a href="#and" id="and" style="color: inherit; text-decoration: none;">
+					<h2><code>and</code></h2>
 				</a>
-				<p>When using fold you will probably encounter cases where a type is a combination (union) of different guards
-				to reduce the boilerplate having to write each combination by hand you can use the <code>combineGuards</code> helper.</p>
+				<p>When using fold you will probably encounter cases where a type is a combination
+					(intersection) of different guards. To reduce the boilerplate having to write
+				each combination by hand you can use the <code>and</code> helper.</p>
 				<pre><code class="language-ts"><span class="hljs-keyword">type</span> A = { a: <span class="hljs-built_in">string</span> };
 <span class="hljs-keyword">type</span> B = { b: <span class="hljs-built_in">number</span> };
 
@@ -156,13 +157,36 @@ pipe(
 <span class="hljs-keyword">const</span> oldIsTypeAAndB = (value: <span class="hljs-built_in">any</span>): value is A &amp; <span class="hljs-function"><span class="hljs-params">B</span> =&gt;</span>
     isTypeA(value) &amp;&amp; isTypeB(value);
 
-<span class="hljs-keyword">const</span> isTypeAAndB = combineGuards(isTypeA, isTypeB); <span class="hljs-comment">// :(t: any): t is A &amp; B =&gt; boolean</span></code></pre>
+<span class="hljs-comment">// isTypeAAndB :: (t: any) =&gt; t is A &amp; B</span>
+<span class="hljs-keyword">const</span> isTypeAAndB = and(isTypeA, isTypeB);</code></pre>
+				<a href="#or" id="or" style="color: inherit; text-decoration: none;">
+					<h2><code>or</code></h2>
+				</a>
+				<p>When using fold you will probably encounter cases where a type is part of an
+					union of different guards. To reduce the boilerplate having to write each
+				combination by hand you can use the <code>or</code> helper.</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">type</span> A = { a: <span class="hljs-built_in">string</span> };
+<span class="hljs-keyword">type</span> B = { b: <span class="hljs-built_in">number</span> };
+
+<span class="hljs-keyword">const</span> isTypeA = (value: <span class="hljs-built_in">any</span>): value is A =&gt;
+  value != <span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-keyword">typeof</span> value.a === <span class="hljs-string">&#x27;string&#x27;</span>;
+
+<span class="hljs-keyword">const</span> isTypeB = (value: <span class="hljs-built_in">any</span>): value is B =&gt;
+  value != <span class="hljs-literal">null</span> &amp;&amp; <span class="hljs-keyword">typeof</span> value.b === <span class="hljs-string">&#x27;number&#x27;</span>;
+
+<span class="hljs-keyword">const</span> oldIsTypeAOrB = (value: <span class="hljs-built_in">any</span>): value is A | <span class="hljs-function"><span class="hljs-params">B</span> =&gt;</span>
+    isTypeA(value) || isTypeB(value);
+
+<span class="hljs-comment">// isTypeAOrB :: (t: any) =&gt; t is A | B</span>
+<span class="hljs-keyword">const</span> isTypeAOrB = or(isTypeA, isTypeB);</code></pre>
 				<a href="#not" id="not" style="color: inherit; text-decoration: none;">
 					<h2><code>not</code></h2>
 				</a>
-				<p>When using createFold you <strong>need to make sure that each guard mutually excludes the others</strong> but it can sometimes be painfull if one type depends on another, therefore we let you use the <code>not</code> operator to exclude a guard</p>
-				<pre><code class="language-ts"><span class="hljs-keyword">type</span> TypeA = { a: <span class="hljs-built_in">string</span>};
-<span class="hljs-keyword">type</span> TypeB = { a: <span class="hljs-string">&#x27;test&#x27;</span>};
+				<p>When using createFold you <strong>need to make sure that each guard mutually excludes
+					the others</strong> but it can sometimes be painfull if one type depends on another,
+				therefore we let you use the <code>not</code> operator to exclude a guard</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">type</span> TypeA = { a: <span class="hljs-built_in">string</span> };
+<span class="hljs-keyword">type</span> TypeB = { a: <span class="hljs-string">&#x27;test&#x27;</span> };
 
 <span class="hljs-keyword">const</span> isTypeA = (value: {a: unknown}): value is TypeA =&gt; <span class="hljs-keyword">typeof</span> value.a === <span class="hljs-string">&#x27;string&#x27;</span>;
 <span class="hljs-keyword">const</span> isTypeB = (value: TypeA): value is TypeB =&gt; value.a === <span class="hljs-string">&#x27;test&#x27;</span>;
