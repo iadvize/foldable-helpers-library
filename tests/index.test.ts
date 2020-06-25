@@ -1,5 +1,4 @@
-import { not } from '../src/guard';
-import { combineGuards } from '../src/combineGuards';
+import { not, or, and } from '../src/guard';
 import { createFold } from '../src/createFold';
 import { createFoldObject } from '../src/createFoldObject';
 
@@ -11,7 +10,8 @@ describe('index', () => {
       not,
       createFold,
       createFoldObject,
-      combineGuards,
+      or,
+      and,
     });
   });
 });

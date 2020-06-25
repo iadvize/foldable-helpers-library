@@ -95,10 +95,11 @@ pipe(
 );
 ```
 
-## `combineGuards`
+## `and`
 
-When using fold you will probably encounter cases where a type is a combination (union) of different guards
-to reduce the boilerplate having to write each combination by hand you can use the `combineGuards` helper.
+When using fold you will probably encounter cases where a type is a combination
+(intersection) of different guards. To reduce the boilerplate having to write
+each combination by hand you can use the `and` helper.
 
 ```ts
 type A = { a: string };
@@ -113,16 +114,42 @@ const isTypeB = (value: any): value is B =>
 const oldIsTypeAAndB = (value: any): value is A & B =>
     isTypeA(value) && isTypeB(value);
 
-const isTypeAAndB = combineGuards(isTypeA, isTypeB); // :(t: any): t is A & B => boolean
+// isTypeAAndB :: (t: any) => t is A & B
+const isTypeAAndB = and(isTypeA, isTypeB);
+```
+
+## `or`
+
+When using fold you will probably encounter cases where a type is part of an
+union of different guards. To reduce the boilerplate having to write each
+combination by hand you can use the `or` helper.
+
+```ts
+type A = { a: string };
+type B = { b: number };
+
+const isTypeA = (value: any): value is A =>
+  value != null && typeof value.a === 'string';
+
+const isTypeB = (value: any): value is B =>
+  value != null && typeof value.b === 'number';
+
+const oldIsTypeAOrB = (value: any): value is A | B =>
+    isTypeA(value) || isTypeB(value);
+
+// isTypeAOrB :: (t: any) => t is A | B
+const isTypeAOrB = or(isTypeA, isTypeB);
 ```
 
 ## `not`
 
-When using createFold you **need to make sure that each guard mutually excludes the others** but it can sometimes be painfull if one type depends on another, therefore we let you use the `not` operator to exclude a guard
+When using createFold you **need to make sure that each guard mutually excludes
+the others** but it can sometimes be painfull if one type depends on another,
+therefore we let you use the `not` operator to exclude a guard
 
 ```ts
-type TypeA = { a: string};
-type TypeB = { a: 'test'};
+type TypeA = { a: string };
+type TypeB = { a: 'test' };
 
 const isTypeA = (value: {a: unknown}): value is TypeA => typeof value.a === 'string';
 const isTypeB = (value: TypeA): value is TypeB => value.a === 'test';
