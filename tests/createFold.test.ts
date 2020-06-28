@@ -71,7 +71,7 @@ describe('createFold', () => {
 
     pipe(
       tags,
-      map(t => {
+      map((t) => {
         const oneType = { tag: t };
 
         const result = pipe(oneType, foldFunction);

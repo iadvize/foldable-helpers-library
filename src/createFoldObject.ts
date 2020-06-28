@@ -11,7 +11,7 @@ export function createFoldObject<TypesRecord extends Record<string, any>>(
     [key in keyof TypesRecord]: Guard<any, TypesRecord[key]>;
   },
 ) {
-  return function<R>(
+  return function <R>(
     funcs: {
       [key in keyof TypesRecord]: Func<TypesRecord[key], R>;
     },
@@ -26,16 +26,16 @@ export function createFoldObject<TypesRecord extends Record<string, any>>(
 
       return pipe(
         keys,
-        findFirst(key => guards[key](s)),
+        findFirst((key) => guards[key](s)),
         fromOption(() => new Error(`No guard found to fold ${s}`)),
         fold(
           // if no key found, we throw error, guards are broken
-          error => {
+          (error) => {
             throw error;
           },
           // we found a key, we return the result of the good function
           // applied to s
-          key => {
+          (key) => {
             return funcs[key](s);
           },
         ),

@@ -6,7 +6,7 @@ import { Funcify, Guardify } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function createFold<Types extends any[]>(...guards: Guardify<Types>) {
-  return function<R>(...funcs: Funcify<Types, R>) {
+  return function <R>(...funcs: Funcify<Types, R>) {
     type AllTypes = Types[number];
 
     return (s: AllTypes): R => {
@@ -18,7 +18,7 @@ export function createFold<Types extends any[]>(...guards: Guardify<Types>) {
         fromOption(() => new Error(`No guard found to fold ${s}`)),
         fold(
           // if no guard found, we throw error, guards are broken
-          error => {
+          (error) => {
             throw error;
           },
           // we found a guard, we return the result of the good function
