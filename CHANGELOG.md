@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0]
+
 ### Changed
 
 -   Remove `createFoldObject` `string` constraint on fold keys
@@ -66,7 +68,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   fold creators `createFold` and `createFoldObject`
 -   helpers `combineGuards` and `not` to compose guards
 
-[Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v2.0.0...HEAD
+[Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v2.1.0...HEAD
+
+[2.1.0]: https://github.com/iadvize/foldable-helpers-library/compare/v2.0.0...v2.1.0
 
 [2.0.0]: https://github.com/iadvize/foldable-helpers-library/compare/v1.0.5...v2.0.0
 
