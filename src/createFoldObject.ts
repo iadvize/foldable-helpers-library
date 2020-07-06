@@ -4,8 +4,10 @@ import { pipe } from 'fp-ts/es6/pipeable';
 
 import { Guard, Func } from './types';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function createFoldObject<TypesRecord extends Record<string, any>>(
+export function createFoldObject<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  TypesRecord extends Record<string | number | symbol, any>
+>(
   guards: {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key in keyof TypesRecord]: Guard<any, TypesRecord[key]>;
@@ -17,12 +19,12 @@ export function createFoldObject<TypesRecord extends Record<string, any>>(
     },
   ) {
     // need & string here to filter number and symbol
-    type Names = keyof TypesRecord & string;
+    type Names = keyof TypesRecord;
 
     type AllTypes = TypesRecord[Names];
 
     return (s: AllTypes): R => {
-      const keys = Object.keys(guards);
+      const keys = Object.keys(guards) as Names[];
 
       return pipe(
         keys,

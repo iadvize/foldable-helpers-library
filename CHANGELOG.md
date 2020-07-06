@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   Remove `createFoldObject` `string` constraint on fold keys
+
 ## [2.0.0]
 
 ### Changed
