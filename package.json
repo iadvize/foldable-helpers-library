@@ -41,7 +41,7 @@
     "rollup-plugin-multi-input": "^1.1.1",
     "rollup-plugin-terser": "^6.1.0",
     "rollup-plugin-typescript2": "^0.27.1",
-    "ts-jest": "^26.1.1",
+    "ts-jest": "^26.1.2",
     "tslib": "^2.0.0",
     "typedoc": "^0.17.8",
     "typescript": "^3.9.6"
