@@ -44,7 +44,7 @@
     "ts-jest": "^26.1.2",
     "tslib": "^2.0.0",
     "typedoc": "^0.17.8",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.7"
   },
   "dependencies": {
     "fp-ts": "^2.7.0"
