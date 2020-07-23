@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed 
+
+-   Fix intersections for `and` and `or` signatures
+
 ## [2.1.0]
 
 ### Changed
