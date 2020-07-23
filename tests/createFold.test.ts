@@ -2,7 +2,7 @@ import { pipe } from 'fp-ts/es6/pipeable';
 import { constant, identity } from 'fp-ts/es6/function';
 import { map, range } from 'fp-ts/es6/Array';
 
-import { createFold } from '../src';
+import { createFold, or } from '../src';
 
 type Type<Tag> = {
   tag: Tag;
@@ -92,5 +92,55 @@ describe('createFold', () => {
     const funcThatWillThrow = () => someFunc(tag);
 
     expect(funcThatWillThrow).toThrowErrorMatchingSnapshot();
+  });
+
+  it('created fold accept refined type', () => {
+    type A1 = 'A1';
+    type A2 = 'A2';
+
+    type B1 = 'B1';
+    type B2 = 'B2';
+
+    type A = A1 | A2;
+    type B = B1 | B2;
+
+    type T1 = A1 | B1;
+
+    type T = A | B;
+
+    const isA1 = (t: T): t is A1 => t === 'A1';
+    const isA2 = (t: T): t is A2 => t === 'A2';
+    const isB1 = (t: T): t is B1 => t === 'B1';
+    const isB2 = (t: T): t is B2 => t === 'B2';
+
+    const isA = or(isA1, isA2);
+    const isB = or(isB1, isB2);
+
+    const is1 = or(isA1, isB1);
+    const is2 = or(isA2, isB2);
+
+    const fold12 = createFold(is1, is2);
+
+    const foldAB = createFold(isA, isB);
+
+    const functionThatTakesOnlyA1 = (t: A1) => t;
+    const t = 'A1' as T;
+
+    const result = pipe(
+      t,
+      fold12(
+        (t1) =>
+          pipe(
+            t1,
+            foldAB<string, T1>(
+              (a) => functionThatTakesOnlyA1(a),
+              () => 'b',
+            ),
+          ),
+        () => 't2',
+      ),
+    );
+
+    expect(result).toEqual('A1');
   });
 });
