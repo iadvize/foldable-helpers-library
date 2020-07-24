@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.0]
+
 ### Changed
 
 -   More flexible `createFold` and `createFoldObject` signature that allow users
@@ -79,7 +81,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   fold creators `createFold` and `createFoldObject`
 -   helpers `combineGuards` and `not` to compose guards
 
-[Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v2.1.1...HEAD
+[Unreleased]: https://github.com/iadvize/foldable-helpers-library/compare/v2.2.0...HEAD
+
+[2.2.0]: https://github.com/iadvize/foldable-helpers-library/compare/v2.1.1...v2.2.0
 
 [2.1.1]: https://github.com/iadvize/foldable-helpers-library/compare/v2.1.0...v2.1.1
 
