@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   More flexible `createFold` and `createFoldObject` signature that allow users
+    to pass already refined data and not loose the refining
+
 ## [2.1.1]
 
 ### Fixed
