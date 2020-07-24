@@ -70,6 +70,14 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-not-exported">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported"><a href="_src_guard_.html#guardedtype" class="tsd-kind-icon">Guarded<wbr>Type</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported"><a href="_src_guard_.html#inputparameterstointersection" class="tsd-kind-icon">Input<wbr>Parameters<wbr>ToIntersection</a></li>
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported"><a href="_src_guard_.html#notguard" class="tsd-kind-icon">Not<wbr>Guard</a></li>
+							</ul>
+						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
@@ -78,6 +86,94 @@
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="_src_guard_.html#or" class="tsd-kind-icon">or</a></li>
 							</ul>
 						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+					<a name="guardedtype" class="tsd-anchor"></a>
+					<h3>Guarded<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">Guarded<wbr>Type&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">x</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-symbol">infer </span> T<span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">never</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iadvize/foldable-helpers-library/blob/39e33b8/src/guard.ts#L6">src/guard.ts:6</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>T</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+					<a name="inputparameterstointersection" class="tsd-anchor"></a>
+					<h3>Input<wbr>Parameters<wbr>ToIntersection</h3>
+					<div class="tsd-signature tsd-kind-icon">Input<wbr>Parameters<wbr>ToIntersection&lt;Params&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">Params</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-symbol">(</span>k<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Params</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-symbol">(</span>k<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">infer </span> I<span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">I</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">never</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iadvize/foldable-helpers-library/blob/39e33b8/src/guard.ts#L19">src/guard.ts:19</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Takes an array of guard parameters (so should have only one item)
+							and return the first parameter converted to an intersection.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>example</dt>
+							<dd><p>type Guards = ... // some guards</p>
+								<p>type GuardsParameters = Parameters&lt;Guards[number]&gt;;
+								type IntersectionOfInputTypes = InputParametersToIntersection<GuardsParameters>;</p>
+							</dd>
+						</dl>
+					</div>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>Params</h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+					<a name="notguard" class="tsd-anchor"></a>
+					<h3>Not<wbr>Guard</h3>
+					<div class="tsd-signature tsd-kind-icon">Not<wbr>Guard&lt;A, B&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">a</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Exclude</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/iadvize/foldable-helpers-library/blob/39e33b8/src/guard.ts#L3">src/guard.ts:3</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>A</h4>
+						</li>
+						<li>
+							<h4>B<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span></h4>
+						</li>
+					</ul>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-type-alias tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>a<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">a</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Exclude</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>a: <span class="tsd-signature-type">A</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">a</span><span class="tsd-signature-symbol"> is </span><span class="tsd-signature-type">Exclude</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
 					</div>
 				</section>
 			</section>
@@ -93,7 +189,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iadvize/foldable-helpers-library/blob/e7f174a/src/guard.ts#L7">src/guard.ts:7</a></li>
+									<li>Defined in <a href="https://github.com/iadvize/foldable-helpers-library/blob/39e33b8/src/guard.ts#L32">src/guard.ts:32</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -116,13 +212,13 @@
 					<a name="not" class="tsd-anchor"></a>
 					<h3>not</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
-						<li class="tsd-signature tsd-kind-icon">not&lt;A, B&gt;<span class="tsd-signature-symbol">(</span>guard<span class="tsd-signature-symbol">: </span><a href="_src_types_.html#guard" class="tsd-signature-type">Guard</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_types_.html#notguard" class="tsd-signature-type">NotGuard</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">not&lt;A, B&gt;<span class="tsd-signature-symbol">(</span>guard<span class="tsd-signature-symbol">: </span><a href="_src_types_.html#guard" class="tsd-signature-type">Guard</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_src_guard_.html#notguard" class="tsd-signature-type">NotGuard</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iadvize/foldable-helpers-library/blob/e7f174a/src/guard.ts#L3">src/guard.ts:3</a></li>
+									<li>Defined in <a href="https://github.com/iadvize/foldable-helpers-library/blob/39e33b8/src/guard.ts#L28">src/guard.ts:28</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -140,7 +236,7 @@
 									<h5>guard: <a href="_src_types_.html#guard" class="tsd-signature-type">Guard</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_src_types_.html#notguard" class="tsd-signature-type">NotGuard</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_src_guard_.html#notguard" class="tsd-signature-type">NotGuard</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">A</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">B</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -154,7 +250,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/iadvize/foldable-helpers-library/blob/e7f174a/src/guard.ts#L25">src/guard.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/iadvize/foldable-helpers-library/blob/39e33b8/src/guard.ts#L64">src/guard.ts:64</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -200,6 +296,15 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="_src_guard_.html#guardedtype" class="tsd-kind-icon">Guarded<wbr>Type</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="_src_guard_.html#inputparameterstointersection" class="tsd-kind-icon">Input<wbr>Parameters<wbr>ToIntersection</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter tsd-is-not-exported">
+						<a href="_src_guard_.html#notguard" class="tsd-kind-icon">Not<wbr>Guard</a>
+					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="_src_guard_.html#and" class="tsd-kind-icon">and</a>
 					</li>
