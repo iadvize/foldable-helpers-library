@@ -44,7 +44,7 @@
     "ts-jest": "^26.1.4",
     "tsd": "^0.13.1",
     "tslib": "^2.0.1",
-    "typedoc": "^0.17.8",
+    "typedoc": "^0.18.0",
     "typescript": "^3.9.7"
   },
   "dependencies": {
