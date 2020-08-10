@@ -48,6 +48,6 @@
     "typescript": "^3.9.7"
   },
   "dependencies": {
-    "fp-ts": "^2.7.1"
+    "fp-ts": "^2.8.1"
   }
 }
