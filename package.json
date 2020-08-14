@@ -37,7 +37,7 @@
     "@types/jest": "^26.0.9",
     "eslint": "^7.6.0",
     "jest": "^26.4.0",
-    "rollup": "^2.24.0",
+    "rollup": "^2.25.0",
     "rollup-plugin-multi-input": "^1.1.1",
     "rollup-plugin-terser": "^7.0.0",
     "rollup-plugin-typescript2": "^0.27.2",
