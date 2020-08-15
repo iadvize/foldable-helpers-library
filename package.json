@@ -35,7 +35,7 @@
     "@rollup/plugin-commonjs": "^15.0.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@types/jest": "^26.0.9",
-    "eslint": "^7.6.0",
+    "eslint": "^7.7.0",
     "jest": "^26.4.0",
     "rollup": "^2.25.0",
     "rollup-plugin-multi-input": "^1.1.1",
