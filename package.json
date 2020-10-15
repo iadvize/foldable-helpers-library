@@ -30,7 +30,7 @@
   "license": "MIT",
   "private": false,
   "devDependencies": {
-    "@iadvize-oss/eslint-config": "^2.0.0",
+    "@iadvize-oss/eslint-config": "^2.1.1",
     "@iadvize-oss/eslint-config-jest": "^1.2.0",
     "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
