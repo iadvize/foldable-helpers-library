@@ -3,7 +3,7 @@ import { Guard } from './types';
 type NotGuard<A, B extends A> = (a: A) => a is Exclude<A, B>;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type GuardedType<T> = T extends (x: any) => x is infer T ? T : never;
+type GuardedType<Type> = Type extends (x: any) => x is infer T ? T : never;
 
 /**
  * Takes an array of guard parameters (so should have only one item)
