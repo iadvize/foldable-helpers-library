@@ -33,7 +33,7 @@
     "@iadvize-oss/eslint-config": "^2.1.2",
     "@iadvize-oss/eslint-config-jest": "^1.2.0",
     "@rollup/plugin-commonjs": "^15.1.0",
-    "@rollup/plugin-node-resolve": "^9.0.0",
+    "@rollup/plugin-node-resolve": "^10.0.0",
     "@types/jest": "^26.0.15",
     "eslint": "^7.11.0",
     "jest": "^26.6.1",
