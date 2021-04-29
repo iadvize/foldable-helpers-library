@@ -1,0 +1,58 @@
+version: 2
+registries:
+  npm-registry-iadvize-jfrog-io-iadvize-api-npm-iadvize-npm:
+    type: npm-registry
+    url: https://iadvize.jfrog.io/iadvize/api/npm/iadvize-npm
+    username: "${{secrets.NPM_REGISTRY_IADVIZE_JFROG_IO_IADVIZE_API_NPM_IADVIZE_NPM_USERNAME}}"
+    password: "${{secrets.NPM_REGISTRY_IADVIZE_JFROG_IO_IADVIZE_API_NPM_IADVIZE_NPM_PASSWORD}}"
+
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "00:00"
+    timezone: Europe/Paris
+  pull-request-branch-name:
+    separator: "-"
+  labels:
+  - "Action: no bump"
+  versioning-strategy: increase
+  ignore:
+  - dependency-name: fp-ts
+    versions:
+    - 2.10.0
+    - 2.10.1
+    - 2.9.3
+    - 2.9.4
+    - 2.9.5
+  - dependency-name: typedoc
+    versions:
+    - 0.20.19
+    - 0.20.20
+    - 0.20.21
+    - 0.20.22
+    - 0.20.23
+    - 0.20.24
+    - 0.20.25
+    - 0.20.26
+    - 0.20.27
+    - 0.20.28
+    - 0.20.29
+    - 0.20.30
+    - 0.20.31
+    - 0.20.32
+    - 0.20.33
+    - 0.20.34
+    - 0.20.35
+  - dependency-name: y18n
+    versions:
+    - 4.0.1
+  - dependency-name: node-notifier
+    versions:
+    - 8.0.1
+  commit-message:
+    prefix: misc
+  rebase-strategy: disabled
+  registries:
+  - npm-registry-iadvize-jfrog-io-iadvize-api-npm-iadvize-npm
