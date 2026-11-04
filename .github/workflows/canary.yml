@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - uses: actions/checkout@v2-beta
+    - uses: actions/checkout@a6747255bd19d7a757dbdda8c654a9f84db19839 # v2-beta
 
     - name: Compute canary version
       id: compute-version
@@ -28,13 +28,13 @@ jobs:
         echo "::set-output name=version::$NEW_VERSION"
         echo "::set-output name=name::$NAME"
 
-    - uses: actions/setup-node@v1
+    - uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e # v1.4.6
       with:
         registry-url: https://registry.npmjs.org/
         node-verion: '12.x'
 
     - name: Cache npm cache
-      uses: actions/cache@v1
+      uses: actions/cache@f5ce41475b483ad7581884324a6eca9f48f8dcc7 # v1.2.1
       with:
         path: ~/.npm
         key: v1-npm-${{ github.event.pull_request.head.ref }}-${{ hashFiles('package-lock.json') }}
@@ -55,7 +55,7 @@ jobs:
 
     - name: Create deployment
       id: deployment
-      uses: actions/github-script@0.4.0
+      uses: actions/github-script@83e4cfe60ad25a2d0637965c993eb54c325d6d8d # 0.4.0
       env:
         NAME: ${{ steps.compute-version.outputs.name }}
         VERSION: ${{ steps.compute-version.outputs.version }}

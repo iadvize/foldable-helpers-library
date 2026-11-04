@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - name: Find pull request
-      uses: iadvize/actions/find-pull-request@2.0.1
+      uses: iadvize/actions/find-pull-request@4356697ecb328ba63de4290b3031061be6f45b50 # 2.0.1
       # only useful for check_suite, we have a pull_request object on pull_request and pull_request_review
       if: github.event_name == 'check_suite'
       id: pr
@@ -25,7 +25,7 @@ jobs:
         token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: 'Merge the current pull request if possible'
-      uses: iadvize/actions/merge@2.0.1
+      uses: iadvize/actions/merge@4356697ecb328ba63de4290b3031061be6f45b50 # 2.0.1
       if: >
         github.event_name != 'check_suite' || (
           github.event_name == 'check_suite'
