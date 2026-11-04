@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: Update deployment status
-      uses: actions/github-script@0.4.0
+      uses: actions/github-script@83e4cfe60ad25a2d0637965c993eb54c325d6d8d # 0.4.0
       env:
         DEPLOYMENT_ID: ${{ github.event.deployment.id }}
       with:
@@ -31,7 +31,7 @@ jobs:
           });
 
     - name: Checkout code
-      uses: actions/checkout@master
+      uses: actions/checkout@61b9e3751b92087fd0b06925ba6dd6314e06f089 # master
       with:
         ref: ${{ github.event.deployment.payload.ref }}
 
@@ -40,7 +40,7 @@ jobs:
         git config user.name "Github actions"
         git config user.email "github-actions@iadvize.com"
 
-    - uses: actions/setup-node@v1
+    - uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e # v1.4.6
       with:
         registry-url: https://registry.npmjs.org/
         node-verion: '12.x'
@@ -65,7 +65,7 @@ jobs:
 
     - name: Update deployment status
       if: always()
-      uses: actions/github-script@0.4.0
+      uses: actions/github-script@83e4cfe60ad25a2d0637965c993eb54c325d6d8d # 0.4.0
       env:
         DEPLOYMENT_ID: ${{ github.event.deployment.id }}
         PUBLISH_STATE: ${{ steps.publish.outputs.state }}
