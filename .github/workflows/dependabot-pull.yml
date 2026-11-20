@@ -7,7 +7,7 @@ on:
 jobs:
   add-assignee:
     name: 'add assignee'
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
 

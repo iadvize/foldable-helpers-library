@@ -8,11 +8,12 @@ on:
 jobs:
   generate-docs:
     name: 'generate docs and push'
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@a6747255bd19d7a757dbdda8c654a9f84db19839 # v2-beta
       with:
+        persist-credentials: true
         ref: master
         token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
 
@@ -59,7 +60,7 @@ jobs:
 
   publish:
     name: 'create version and deploy'
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     needs:
     - generate-docs
@@ -75,6 +76,7 @@ jobs:
     steps:
     - uses: actions/checkout@a6747255bd19d7a757dbdda8c654a9f84db19839 # v2-beta
       with:
+        persist-credentials: true
         ref: master
         token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
 
