@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+-   CI: set `persist-credentials` explicitly on `actions/checkout` steps
+-   CI: run workflows on `ubuntu-latest` and bump `actions/cache` (GitHub removed `ubuntu-18.04` and `actions/cache` v1)
+
 ## [2.2.0]
 
 ### Changed

@@ -14,6 +14,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@a6747255bd19d7a757dbdda8c654a9f84db19839 # v2-beta
+      with:
+        persist-credentials: false
 
     - uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e # v1.4.6
       with:
@@ -48,6 +50,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@a6747255bd19d7a757dbdda8c654a9f84db19839 # v2-beta
+      with:
+        persist-credentials: false
 
     - uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e # v1.4.6
       with:
@@ -72,6 +76,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@a6747255bd19d7a757dbdda8c654a9f84db19839 # v2-beta
+      with:
+        persist-credentials: false
 
     - uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e # v1.4.6
       with:
@@ -96,6 +102,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@a6747255bd19d7a757dbdda8c654a9f84db19839 # v2-beta
+      with:
+        persist-credentials: false
 
     - uses: actions/setup-node@f1f314fca9dfce2769ece7d933488f076716723e # v1.4.6
       with:

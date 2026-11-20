@@ -11,6 +11,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@a6747255bd19d7a757dbdda8c654a9f84db19839 # v2-beta
+      with:
+        persist-credentials: false
 
     - name: Compute canary version
       id: compute-version

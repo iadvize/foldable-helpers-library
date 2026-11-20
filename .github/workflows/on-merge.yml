@@ -13,6 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@a6747255bd19d7a757dbdda8c654a9f84db19839 # v2-beta
       with:
+        persist-credentials: true
         ref: master
         token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
 
@@ -75,6 +76,7 @@ jobs:
     steps:
     - uses: actions/checkout@a6747255bd19d7a757dbdda8c654a9f84db19839 # v2-beta
       with:
+        persist-credentials: true
         ref: master
         token: ${{ secrets.GITHUB_TOKEN_REPO_WRITE }}
 
