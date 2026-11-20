@@ -5,7 +5,7 @@ on: deployment
 jobs:
   npm:
     name: 'Deploy on npm'
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
     - name: Update deployment status
